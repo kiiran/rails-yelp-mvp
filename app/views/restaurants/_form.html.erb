@@ -1,14 +1,13 @@
 <%= simple_form_for(@restaurant) do |f| %>
   <%= f.error_notification %>
-
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :address %>
     <%= f.input :phone_number %>
-    <%= f.input :category %>
+    <%= f.input :category, :collection => %w[belgian chinese french italian japanese] %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.submit "Add restaurant", class: "btn btn-primary" %>
   </div>
 <% end %>

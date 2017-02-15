@@ -1,24 +1,73 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @restaurant.name %>
-</p>
+<h1><%= @restaurant.name %></h1>
 
-<p>
-  <strong>Address:</strong>
-  <%= @restaurant.address %>
-</p>
+<div class="card">
+  <table>
+    <tr>
+      <td class="info-tag">address:</td>
+      <td><%= @restaurant.address %></td>
+    </tr>
+    <tr>
+      <td class="info-tag">tel:</td>
+      <td><%= @restaurant.phone_number %></td>
+    </tr>
+    <tr>
+      <td class="info-tag">cuisine:</td>
+      <td><%= @restaurant.category.capitalize %></td>
+    </tr>
+    <tr>
+      <td class="info-tag">average rating:</td>
+      <td>
+        <% review_count = @restaurant.reviews.length %>
+        <% review_count == 1 ? review_word = "review" : review_word = "reviews" %>
+        <% if review_count == 0 %>
+          <em>(No reviews submitted yet)</em>
+        <% else %>
+          <% total = 0 %>
+          <% @restaurant.reviews.each do |review| %>
+            <% total += review.rating %>
+          <% end %>
+          <% average = total.to_f / @restaurant.reviews.length %>
+          <%= average.round(1) %>/5 (based on <%= review_count %> <%= review_word %>)
+        <% end %>
+      </td>
+    </tr>
+  </table>
+</div>
+<div>
+  <!-- <%#= link_to 'Add review', new_restaurant_review_path(@restaurant), class: "btn btn-danger" %> | -->
+  <%= link_to 'Edit', edit_restaurant_path(@restaurant), class: "btn btn-danger" %> |
+  <%= link_to 'Back', restaurants_path, class: "btn btn-primary" %>
+</div>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @restaurant.phone_number %>
-</p>
 
-<p>
-  <strong>Category:</strong>
-  <%= @restaurant.category %>
-</p>
+<div class="card">
+  <p><em>Add a review for <%= @restaurant.name %></em></p>
+  <%= render 'reviewform', restaurant: @restaurant, review: @review %>
+</div>
 
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-<%= link_to 'Back', restaurants_path %>
+
+
+<% unless review_count == 0 %>
+  <h3>Reviews</h3>
+  <div class="card card-info bg-grey padded">
+    <table>
+      <% @restaurant.reviews.each do |review| %>
+        <tr class="review-row">
+          <td style="width: 120px;">
+            <% review.rating.times do %>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            <% end %>
+            <% (5 - review.rating).times do %>
+              <i class="fa fa-star-o" aria-hidden="true"></i>
+            <% end %>
+          </td>
+          <td>||</td>
+          <td><em>"<%= review.content %>"</em></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>
+

@@ -13,3 +13,16 @@
 @import "components/index";
 @import "pages/index";
 @import "vendor/index";
+
+body {
+  width: 80%;
+  margin: 0 auto;
+  align-content: center;
+  // background-image: url("https://www.bunnyholder.com/1400/1000/19");
+  // background-repeat: no-repeat;
+  // background-size: cover !important;
+}
+
+h1, h2, h3 {
+  text-shadow: 1px 1px 5px #fff;
+}

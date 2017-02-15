@@ -1,0 +1,25 @@
+.info-tag {
+  text-align: right;
+  color: grey;
+}
+
+th {
+  color: #444444;
+  font-weight: 100;
+  padding-left: 10px;
+  background-color: #E6E6E6;
+}
+
+td {
+  padding: 5px 5px;
+  border-width: 1px 0; /*  1px top & bottom border,  0px left & right */
+  border-color: #f3f3f3;
+  border-style: solid;
+}
+
+.review-row {
+  padding: 5px 5px;
+  border-width: 2px 0; /*  1px top & bottom border,  0px left & right */
+  border-color: #fff;
+  border-style: solid;
+}
